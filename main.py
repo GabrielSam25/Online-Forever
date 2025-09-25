@@ -10,8 +10,8 @@ from keep_alive import keep_alive
 
 init(autoreset=True)
 
-status = "online"  # online/dnd/idle
-custom_status = "youtube.com/@SealedSaucer"  # Custom Status
+status = "dnd"  # online/dnd/idle
+custom_status = "A geometria é única e eterna; ela é um reflexo do pensamento de Deus"  # Custom Status
 
 usertoken = os.getenv("TOKEN")
 if not usertoken:
