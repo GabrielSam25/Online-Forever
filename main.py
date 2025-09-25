@@ -10,7 +10,7 @@ from keep_alive import keep_alive
 
 init(autoreset=True)
 
-status = "dnd"  # online/dnd/idle
+status = "idle"  # online/dnd/idle
 custom_status = "A geometria é única e eterna; ela é um reflexo do pensamento de Deus"  # Custom Status
 
 usertoken = os.getenv("TOKEN")
