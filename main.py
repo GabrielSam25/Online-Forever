@@ -35,13 +35,14 @@ async def onliner(token, status):
         start = json.loads(await ws.recv())
         heartbeat = start["d"]["heartbeat_interval"]
 
+        # Autenticação
         auth = {
             "op": 2,
             "d": {
                 "token": token,
                 "properties": {
                     "$os": "Windows 10",
-                    "$browser": "Google Chrome",
+                    "$browser": "Chrome",
                     "$device": "Windows",
                 },
                 "presence": {"status": status, "afk": False},
@@ -49,6 +50,7 @@ async def onliner(token, status):
         }
         await ws.send(json.dumps(auth))
 
+        # Custom Status
         cstatus = {
             "op": 3,
             "d": {
@@ -59,33 +61,29 @@ async def onliner(token, status):
                         "state": custom_status,
                         "name": "Custom Status",
                         "id": "custom",
-                                #Uncomment the below lines if you want an emoji in the status
-                                #"emoji": {
-                                    #"name": "emoji name",
-                                    #"id": "emoji id",
-                                    #"animated": False,
-                                #},
-                            }
-                        ],
+                    }
+                ],
                 "status": status,
                 "afk": False,
             },
         }
         await ws.send(json.dumps(cstatus))
 
-        online = {"op": 1, "d": "None"}
-        await asyncio.sleep(heartbeat / 1000)
-        await ws.send(json.dumps(online))
+        print(f"[+] Logged in as {username} ({userid})!")
+
+        # Loop de heartbeat
+        while True:
+            await ws.send(json.dumps({"op": 1, "d": None}))
+            await asyncio.sleep(heartbeat / 1000)
+
 
 async def run_onliner():
     if platform.system() == "Windows":
         os.system("cls")
     else:
         os.system("clear")
-    print(f"{Fore.WHITE}[{Fore.LIGHTGREEN_EX}+{Fore.WHITE}] Logged in as {Fore.LIGHTBLUE_EX}{username} {Fore.WHITE}({userid})!")
-    while True:
-        await onliner(usertoken, status)
-        await asyncio.sleep(50)
+    await onliner(usertoken, status)
+
 
 keep_alive()
 asyncio.run(run_onliner())
