@@ -4,7 +4,6 @@ from discord.ext import commands
 
 # Configurando os intents
 intents = discord.Intents.default()
-intents.message_content = True  # necessário para ler mensagens no Discord
 
 client = commands.Bot(command_prefix=':', self_bot=True, help_command=None, intents=intents)
 
