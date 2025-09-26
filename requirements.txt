@@ -3,4 +3,4 @@ requests
 colorama
 websockets
 websocket-client
-discord.py
+discord.py==1.7.3
